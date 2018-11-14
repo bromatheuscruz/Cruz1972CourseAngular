@@ -1,3 +1,21 @@
-<p>
-  login works!
-</p>
+<div class="container-fluid mt-5">
+  <h4>Sign In</h4>
+  <div class="form-group">
+    <label for="usr" class="float-left">Name:</label>
+    <input [(ngModel)]="user.email" type="text" class="form-control" id="usr" />
+  </div>
+  <div class="form-group">
+    <label for="pwd" class="float-left">Password:</label>
+    <input
+      [(ngModel)]="user.password"
+      type="password"
+      class="form-control"
+      id="pwd"
+    />
+  </div>
+  <div class="form-group">
+    <button type="button" (click)="authUser(user)" class="btn btn-info">
+      Goto NodeStore
+    </button>
+  </div>
+</div>
