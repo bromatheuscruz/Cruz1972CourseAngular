@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, EventEmitter } from "@angular/core";
 
-import { API_CONFIG } from "./../config/api.config";
+import { API_CONFIG } from "./config/api.config";
 
 @Injectable({
   providedIn: "root"
@@ -22,20 +22,31 @@ export class AuthService {
   }
 
   authenticate(user: any) {
-    let res = this.http.post<any>(
+    return this.http.post<any>(
       `${API_CONFIG.baseUrl}:${API_CONFIG.basePort}/customers/authenticate`,
       {
         email: user.email,
         password: user.password
       }
     );
+  }
 
-    res.subscribe(data => {
-      if (user.email == data.data.email) {
-        this.showNav();
-      }
-    });
+  isAuthorized(): boolean {
+    let token = localStorage.getItem("token");
 
-    return res;
+    if (token == null) {
+      return false;
+    }
+
+    this.http
+      .get(`${API_CONFIG.baseUrl}:${API_CONFIG.basePort}/`, {
+        headers: { "x-access-token": token }
+      })
+      .subscribe(response => {
+        console.log(response);
+        this.userAuthenticate = response["auth"];
+      });
+
+    return this.userAuthenticate;
   }
 }

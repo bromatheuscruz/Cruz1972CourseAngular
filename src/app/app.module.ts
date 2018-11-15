@@ -1,3 +1,4 @@
+import { AuthGuard } from "./guards/auth-guard.service";
 import { AuthService } from "./auth.service";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -32,7 +33,7 @@ import { LoginComponent } from "./login/login.component";
     CommonModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

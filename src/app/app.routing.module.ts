@@ -1,3 +1,4 @@
+import { AuthGuard } from "./guards/auth-guard.service";
 import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 
@@ -9,9 +10,13 @@ import { LoginComponent } from "./login/login.component";
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: "", component: HomeComponent },
-      { path: "orders", component: OrderComponent },
-      { path: "customers", component: CustomerComponent },
+      { path: "", component: HomeComponent, canActivate: [AuthGuard] },
+      { path: "orders", component: OrderComponent, canActivate: [AuthGuard] },
+      {
+        path: "customers",
+        component: CustomerComponent,
+        canActivate: [AuthGuard]
+      },
       {
         path: "login",
         component: LoginComponent
