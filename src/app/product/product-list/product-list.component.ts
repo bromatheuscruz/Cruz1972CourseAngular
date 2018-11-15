@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { Product } from "./../../models/product.model";
 import { ProductService } from "./../product.service";
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-product-list",
@@ -10,12 +11,17 @@ import { Router } from "@angular/router";
 })
 export class ProductListComponent implements OnInit {
   products: Product[];
-  constructor(private productService: ProductService, private router: Router) {}
+  subscription: Subscription;
+  constructor( private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.productService.list().subscribe(products => {
-      this.products = products;
-    });
+    this.subscription = this.activatedRoute.data.subscribe((data: { products: Product[] }) => {
+  
+      this.products = data.products;
+    })
+
+
+
   }
 
   editar(id: string): void {

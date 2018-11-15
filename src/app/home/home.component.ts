@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -6,8 +7,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  title:string = "Node Store API";
-  constructor() {}
+  title: string = "Node Store API";
+  constructor(private authService: AuthService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.showNav();
+  }
 }

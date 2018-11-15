@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "./../auth.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-login",
@@ -11,43 +12,46 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
     this.authService.hidenNav();
   }
-
-  user: any = this.getEmptyUser();
-
-  setLocalStorage(res: any) {
-    localStorage.setItem("token", res.token);
-    localStorage.setItem("email", res.data.email);
-    localStorage.setItem("name", res.data.name);
+  isLoginError: boolean;
+  user: any = {
+    email: "bromatheuscruz@gmail.com",
+    password: "123456"
   }
 
-  removeLocalStorage() {
+  setLocalStorage(response: any) {
+    localStorage.setItem("token", response.token);
+    localStorage.setItem("email", response.data.email);
+    localStorage.setItem("name", response.data.name);
+  }
+
+  removeItemsFromLocalStorage() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     localStorage.removeItem("name");
   }
 
-  authUser(user: any) {
-    this.authService.authenticate(user).subscribe(res => {
-      if (this.user.email == res.data.email) {
-        this.setLocalStorage(res);
-        this.authService.showNav();
-        this.router.navigate(["/"]);
-      } else {
-        this.removeLocalStorage();
-      }
+  authenticateUser(user: any) {
+
+    this.authService.authenticateUser(user).subscribe((response) => {
+      this.setLocalStorage(response);
+      this.router.navigate(['/'])
+    }, (err: HttpErrorResponse) => {
+      this.isLoginError = true;
     });
   }
 
-  getEmptyUser() {
-    return {
+  cleanUser() {
+    this.user = {
       email: "",
       password: ""
     };
   }
 
-  ngOnInit() {}
-
-  ngOnDestroy(): void {
-    this.user = this.getEmptyUser();
+  ngOnInit() {
   }
+
+  ngOnDestroy() {
+
+  }
+
 }

@@ -17,7 +17,7 @@ export class ProductEditComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   updateProduct(product: Product) {
     this.productService.updateProduct(product).subscribe(msg => {
@@ -26,13 +26,13 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inscricao = this.activatedRoute.params.subscribe(params => {
-      this.id = params["id"];
-    });
 
-    this.productService.getProductById(this.id).subscribe(product => {
-      this.product = product;
-    });
+
+    this.inscricao = this.activatedRoute.data.subscribe((data: { product: Product }) => {
+      this.product = data.product;
+    })
+
+
   }
 
   ngOnDestroy(): void {

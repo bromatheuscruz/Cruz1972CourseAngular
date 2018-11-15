@@ -5,6 +5,8 @@ import { NgModule } from "@angular/core";
 import { NewProductComponent } from "./new-product/new-product.component";
 import { ProductEditComponent } from "./product-edit/product-edit.component";
 import { ProductComponent } from "./product.component";
+import { ProductListResolver } from "./product-resolver/product-list.resolver";
+import { ProductResolver } from "./product-resolver/product-resolver";
 
 const productRoutes = [
   {
@@ -13,7 +15,8 @@ const productRoutes = [
     children: [
       {
         path: "edit/:id",
-        component: ProductEditComponent
+        component: ProductEditComponent,
+        resolve: {product: ProductResolver}
       },
       {
         path: "novo",
@@ -21,7 +24,8 @@ const productRoutes = [
       },
       {
         path: "list",
-        component: ProductListComponent
+        component: ProductListComponent,
+        resolve: { products: ProductListResolver }
       }
     ]
   }
@@ -33,4 +37,4 @@ const productRoutes = [
   declarations: [],
   providers: []
 })
-export class ProductRoutingModule {}
+export class ProductRoutingModule { }

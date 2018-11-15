@@ -2,16 +2,17 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, EventEmitter } from "@angular/core";
 
 import { API_CONFIG } from "./config/api.config";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
+
   showNavEmitter = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  userAuthenticate: boolean = false;
 
   hidenNav() {
     this.showNavEmitter.emit(false);
@@ -21,7 +22,7 @@ export class AuthService {
     this.showNavEmitter.emit(true);
   }
 
-  authenticate(user: any) {
+  authenticateUser(user: any) {
     return this.http.post<any>(
       `${API_CONFIG.baseUrl}:${API_CONFIG.basePort}/customers/authenticate`,
       {
@@ -31,22 +32,20 @@ export class AuthService {
     );
   }
 
-  isAuthorized(): boolean {
+  isAuthenticated(): Observable<any> {
     let token = localStorage.getItem("token");
 
-    if (token == null) {
-      return false;
-    }
 
-    this.http
+    let res = this.http
       .get(`${API_CONFIG.baseUrl}:${API_CONFIG.basePort}/`, {
         headers: { "x-access-token": token }
       })
-      .subscribe(response => {
-        console.log(response);
-        this.userAuthenticate = response["auth"];
-      });
 
-    return this.userAuthenticate;
+    return res;
   }
+
+  login(user) {
+
+  }
+
 }
