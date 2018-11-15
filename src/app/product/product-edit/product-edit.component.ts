@@ -12,7 +12,7 @@ import { Subscription } from "rxjs";
 export class ProductEditComponent implements OnInit {
   product: Product;
   id: string;
-  inscricao: Subscription;
+  subscription: Subscription;
 
   constructor(
     private productService: ProductService,
@@ -28,7 +28,7 @@ export class ProductEditComponent implements OnInit {
   ngOnInit() {
 
 
-    this.inscricao = this.activatedRoute.data.subscribe((data: { product: Product }) => {
+    this.subscription = this.activatedRoute.data.subscribe((data: { product: Product }) => {
       this.product = data.product;
     })
 
@@ -36,6 +36,6 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.inscricao.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
