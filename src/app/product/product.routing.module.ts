@@ -1,17 +1,17 @@
-import { AuthGuard } from './../guards/auth-guard.service';
-import { ProductListComponent } from "./product-list/product-list.component";
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
+import { ProductComponent } from "./product.component";
+import { AuthGuard } from './../guards/auth-guard.service';
+import { ProductResolver } from "./product-resolver/product-resolver";
 import { NewProductComponent } from "./new-product/new-product.component";
 import { ProductEditComponent } from "./product-edit/product-edit.component";
-import { ProductComponent } from "./product.component";
+import { ProductListComponent } from "./product-list/product-list.component";
 import { ProductListResolver } from "./product-resolver/product-list.resolver";
-import { ProductResolver } from "./product-resolver/product-resolver";
 
 const productRoutes: Routes = [
   {
-    path: "products",
+    path: "",
     canActivate: [AuthGuard],
     component: ProductComponent,
     children: [

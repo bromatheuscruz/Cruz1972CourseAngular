@@ -43,7 +43,6 @@ export class AuthGuard implements CanActivate, CanLoad {
     this.authService.isAuthenticated().subscribe((data: { auth: boolean }) => {
 
       isAuth = data.auth
-      console.log(isAuth)
     })
 
     return !isAuth;
