@@ -1,3 +1,4 @@
+import { ProductRoutingModule } from './product/product.routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from "./guards/auth-guard.service";
 import { RouterModule } from "@angular/router";
@@ -18,8 +19,7 @@ import { LoginComponent } from "./login/login.component";
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
 
-    ])
-  ],
+    ])],
   exports: [RouterModule],
   providers: []
 })

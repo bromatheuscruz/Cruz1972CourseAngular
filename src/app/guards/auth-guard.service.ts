@@ -24,10 +24,17 @@ export class AuthGuard implements CanActivate, CanLoad {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
+    if (this.checkAccess()) {
+      this.authService.showNav();
+    }
     return this.checkAccess();
   }
 
   canLoad(router: Route): Observable<boolean> | Promise<boolean> | boolean {
+
+    if (this.checkAccess()) {
+      this.authService.showNav();
+    }
     return this.checkAccess();
   }
 

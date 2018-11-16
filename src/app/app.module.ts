@@ -28,14 +28,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
-    ProductModule,
-    AppRoutingModule,
     CommonModule,
     FormsModule,
-    ProductModule
-  ],
+    ProductModule,
+    AppRoutingModule],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
