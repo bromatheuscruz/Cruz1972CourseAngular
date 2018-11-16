@@ -34,9 +34,10 @@ export class LoginComponent implements OnInit {
 
     this.authService.authenticateUser(user).subscribe((response) => {
       this.setLocalStorage(response);
-      this.router.navigate(['/'])
+      this.router.navigate(['/home'])
     }, (err: HttpErrorResponse) => {
       this.isLoginError = true;
+      this.user.password = "";
     });
   }
 

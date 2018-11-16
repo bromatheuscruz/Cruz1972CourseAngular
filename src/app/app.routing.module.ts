@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from "./guards/auth-guard.service";
 import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
@@ -10,19 +11,16 @@ import { LoginComponent } from "./login/login.component";
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: "", component: HomeComponent, canActivate: [AuthGuard] },
-      { path: "orders", component: OrderComponent, canActivate: [AuthGuard] },
-      {
-        path: "customers",
-        component: CustomerComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: "login",
-        component: LoginComponent
-      }
+      { path: "home", component: HomeComponent, canActivate: [AuthGuard], canLoad: [AuthGuard] },
+      { path: "orders", component: OrderComponent, canActivate: [AuthGuard], canLoad: [AuthGuard] },
+      { path: "customers", component: CustomerComponent, canActivate: [AuthGuard], canLoad: [AuthGuard] },
+      { path: "login", component: LoginComponent },
+      { path: '', redirectTo: '/home', pathMatch: 'full' },
+      { path: '**', component: PageNotFoundComponent }
+
     ])
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: []
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

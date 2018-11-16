@@ -1,5 +1,6 @@
+import { AuthGuard } from './../guards/auth-guard.service';
 import { ProductListComponent } from "./product-list/product-list.component";
-import { RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
 import { NewProductComponent } from "./new-product/new-product.component";
@@ -8,15 +9,16 @@ import { ProductComponent } from "./product.component";
 import { ProductListResolver } from "./product-resolver/product-list.resolver";
 import { ProductResolver } from "./product-resolver/product-resolver";
 
-const productRoutes = [
+const productRoutes: Routes = [
   {
     path: "products",
+    canActivate: [AuthGuard],
     component: ProductComponent,
     children: [
       {
         path: "edit/:id",
         component: ProductEditComponent,
-        resolve: {product: ProductResolver}
+        resolve: { product: ProductResolver }
       },
       {
         path: "novo",
@@ -30,7 +32,6 @@ const productRoutes = [
     ]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(productRoutes)],
   exports: [RouterModule],

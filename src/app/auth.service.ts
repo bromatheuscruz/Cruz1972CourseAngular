@@ -36,16 +36,10 @@ export class AuthService {
     let token = localStorage.getItem("token");
 
 
-    let res = this.http
-      .get(`${API_CONFIG.baseUrl}:${API_CONFIG.basePort}/`, {
+    return this.http
+      .get<any>(`${API_CONFIG.baseUrl}:${API_CONFIG.basePort}/`, {
         headers: { "x-access-token": token }
       })
-
-    return res;
-  }
-
-  login(user) {
-
   }
 
 }

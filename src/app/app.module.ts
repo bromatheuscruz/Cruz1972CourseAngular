@@ -14,6 +14,7 @@ import { OrderComponent } from "./order/order.component";
 import { HomeComponent } from "./home/home.component";
 import { ProductModule } from "./product/product.module";
 import { LoginComponent } from "./login/login.component";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoginComponent } from "./login/login.component";
     CustomerComponent,
     OrderComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +33,10 @@ import { LoginComponent } from "./login/login.component";
     ProductModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ProductModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
