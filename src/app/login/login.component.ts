@@ -14,8 +14,12 @@ export class LoginComponent implements OnInit {
   }
   isLoginError: boolean;
   user: any = {
-    email: "bromatheuscruz@gmail.com",
-    password: "123456"
+    email: "",
+    password: ""
+  }
+
+  isValidAndTouched(fieldName: any): boolean {
+    return fieldName.invalid && fieldName.touched ? true : false;
   }
 
   setLocalStorage(response: any) {
@@ -31,6 +35,8 @@ export class LoginComponent implements OnInit {
   }
 
   authenticateUser(user: any) {
+
+    console.log(user)
 
     this.authService.authenticateUser(user).subscribe((response) => {
       this.setLocalStorage(response);
