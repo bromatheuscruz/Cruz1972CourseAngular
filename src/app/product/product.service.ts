@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class ProductService {
   private readonly API = `${API_CONFIG.baseUrl}:${API_CONFIG.basePort}`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   list(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.API}/products`);
@@ -26,8 +26,17 @@ export class ProductService {
   }
 
   createNewProduct(product: Product): Observable<any> {
+    console.log('Enviando ... no service ')
+    console.log(product)
     return this.http.post<any>(`${this.API}/products`, {
-      product
+      title: product.title,
+      price: product.price,
+      description: product.description,
+      slug: product.slug
     });
+  }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.API}/products/${id}`)
   }
 }

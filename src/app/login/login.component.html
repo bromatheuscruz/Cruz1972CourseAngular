@@ -1,20 +1,31 @@
-<div class="container-fluid mt-5">
+<form #f="ngForm" (ngSubmit)="authenticateUser(f)" class="container-fluid mt-5">
   <h1 class="mb-5">Welcome Padawan</h1>
   <h4>Sign In</h4>
   <div class="form-group">
-    <label for="usr" class="float-left">Name:</label>
-    <input [(ngModel)]="user.email" type="text" class="form-control" id="usr" />
+    <label for="usr" class="float-left">E-mail:</label>
+    <input [class.is-invalid]="isValidAndTouched(email)" required email name="email" [(ngModel)]="user.email" type="text"
+      class="form-control " id="usr" #email="ngModel" />
+    <div *ngIf="isValidAndTouched(email)" class="invalid-feedback">
+      Please choose a email.
+    </div>
   </div>
+  
+
   <div class="form-group">
     <label for="pwd" class="float-left">Password:</label>
-    <input [(ngModel)]="user.password" type="password" class="form-control" id="pwd" />
+    <input [class.is-invalid]="isValidAndTouched(password)" #password="ngModel" required name="password" [(ngModel)]="user.password"
+      type="password" class="form-control" id="pwd" />
+    <div *ngIf="isValidAndTouched(password)" class="invalid-feedback">
+      Please choose a password
+    </div>
   </div>
   <div class="form-group">
-    <button type="button" (click)="authenticateUser(user)" class="btn btn-info">
+    <button type="button" [disabled]="!f.valid" (click)="authenticateUser(user)" class="btn btn-info">
       Go to NodeStore
     </button>
   </div>
-  <div *ngIf="isLoginError" class="alert alert-danger" role="alert">
-    Usuário ou senha inválidos
-  </div>
-</div>
+
+    <div *ngIf="isLoginError" class="alert alert-danger md-auto" role="alert">
+      Usuário ou senha inválidos
+    </div>
+</form>

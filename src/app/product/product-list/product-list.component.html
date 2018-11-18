@@ -13,13 +13,10 @@
       <td>{{ product?.price }}</td>
       <td>
         <span class="float-right">
-          <button
-            (click)="editar(product._id)"
-            class="btn btn-outline-success mb-1 mr-1 btn-sm"
-          >
+          <button (click)="editar(product._id)" class="btn btn-outline-success mb-1 mr-1 btn-sm">
             <i class="material-icons md-24">border_color</i>
           </button>
-          <button class="btn btn-outline-danger mb-1 btn-sm">
+          <button (click)=deleteProduct(product._id) class="btn btn-outline-danger mb-1 btn-sm">
             <i class="material-icons md-24">delete_outline</i>
           </button>
         </span>

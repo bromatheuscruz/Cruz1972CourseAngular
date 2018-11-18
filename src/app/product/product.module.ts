@@ -2,7 +2,7 @@ import { ProductRoutingModule } from './product.routing.module';
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 import { ProductComponent } from "./product.component";
@@ -14,7 +14,7 @@ import { ProductEditComponent } from "./product-edit/product-edit.component";
 import { ProductListResolver } from "./product-resolver/product-list.resolver";
 
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule, ProductRoutingModule],
+  imports: [CommonModule, RouterModule, FormsModule, ProductRoutingModule, ReactiveFormsModule],
   exports: [],
   declarations: [
     ProductComponent,

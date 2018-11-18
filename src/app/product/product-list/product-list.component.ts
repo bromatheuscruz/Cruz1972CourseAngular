@@ -12,16 +12,22 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class ProductListComponent implements OnInit {
   products: Product[];
   subscription: Subscription;
-  constructor( private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit() {
     this.subscription = this.activatedRoute.data.subscribe((data: { products: Product[] }) => {
-  
+
       this.products = data.products;
     })
 
 
 
+  }
+
+  deleteProduct(id: string) {
+    this.productService.deleteProduct(id).subscribe(response => {
+      
+    })
   }
 
   editar(id: string): void {
